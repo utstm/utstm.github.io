@@ -1,0 +1,559 @@
+---
+layout: dynamic
+---
+
+<!--============================
+=            Banner            =
+=============================-->
+
+<section class="banner bg-banner-one overlay">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<!-- Content Block -->
+				<div class="block">
+					<!-- Coundown Timer -->
+					<div class="timer"></div>
+          <!-- <i style="color:white">Upcoming</i> -->
+					<h1 id="theme"></h1>
+					<h2 id="desc" style="text-transform: none"></h2>
+					<h6 id="when_where">02-05 July 2017 California</h6>
+					<!-- Action Button -->
+					<!-- <a href="#" class="btn btn-white-md">get ticket now</a> -->
+					<a href="https://utexas.zoom.us/j/91041356319" class="btn btn-white-md">JOIN ZOOM</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!--====  End of Banner  ====-->
+
+<!-- <section style="padding: 100px 0;">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 mx-auto">
+				<div class="text-center p-5 shadow rounded">
+					<h2 class="mb-3">You have downloaded free version of Even<span class="alternate">tre</span></h2>
+					<h4 class="mb-3">To get full access of this page please purchase the premium version</h4>
+					<h4>Why Premium?</h4>
+					<ul class="list-unstyled mb-4">
+						<li>Full Template Pack</li>
+						<li>Priority Support</li>
+						<li>Documentation Included</li>
+						<li>Monthly Update</li>
+						<li>Lifetime Download</li>
+						<li>Personal and commercial Use</li>
+						<li>One time payment</li>
+					</ul>
+					<a href="https://themefisher.com/products/eventre-event-conference-website-template/" target="_blank" class="btn btn-main">Buy Premium Version</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section> -->
+
+<!--===========================
+=            About            =
+============================-->
+
+<!-- <section class="section about">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-4 col-md-6 align-self-center">
+				<div class="image-block bg-about">
+					<img class="img-fluid" src="images/speakers/featured-speaker.jpg" alt="">
+				</div>
+			</div>
+			<div class="col-lg-8 col-md-6 align-self-center">
+				<div class="content-block">
+					<h2>About The <span class="alternate">Eventre</span></h2>
+					<div class="description-one">
+						<p>
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusm tempor incididunt ut labore dolore magna aliqua enim ad minim veniam quis nostrud exercitation ullamco.
+						</p>
+					</div>
+					<div class="description-two">
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmtempor incididunt ut labore et dolore magna aliq enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea.</p>
+					</div>
+					<ul class="list-inline">
+						<li class="list-inline-item">
+							<a href="#" class="btn btn-main-md">Buy ticket</a>
+						</li>
+						<li class="list-inline-item">
+							<a href="#" class="btn btn-transparent-md">Read more</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</section> -->
+
+<!--====  End of About  ====-->
+
+
+
+<!--==============================
+=            Schedule            =
+===============================-->
+
+<section id="agenda" class="section schedule">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="section-title">
+					<h3>Check out <span class="alternate">Agenda</span></h3>
+					<!-- <p>
+            The success of a club meeting depends on the participants. At each meeting, there are many roles to fill and they play an important part in making the club experience enjoyable.
+            Below is a list of our supporting roles.
+          </p> -->
+          <a href="https://docs.google.com/spreadsheets/d/17Vtxbeh7Q6-ic89sWC8_U8RUoUAr6dlvi3jxADRMNQU/" class="btn btn-main-md">Signup roles</a>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+
+
+				<!-- <div class="schedule-tab">
+					<ul class="nav nav-pills text-center">
+					  <li class="nav-item">
+					    <a class="nav-link active" href="#nov20" data-toggle="pill">
+					    	Main
+					    	<span>Prepared Speeches</span>
+					    </a>
+					  </li>
+					  <li class="nav-item">
+					    <a class="nav-link" href="#nov21" data-toggle="pill">
+							TableTopics
+					    	<span>Impromptu Speeches</span>
+					    </a>
+					  </li>
+					  <li class="nav-item">
+					    <a class="nav-link" href="#nov22" data-toggle="pill">
+							Evaluation
+					    	<span>Feedback</span>
+					    </a>
+					  </li>
+					</ul>
+				</div> -->
+
+        <div class="schedule-contents bg-schedule">
+					<div class="tab-content" id="pills-tabContent">
+					  <div class="tab-pane fade show active schedule-item" id="nov20">
+              <ul class="m-0 p-0">
+					  		<li class="headings">
+                  <div class="time">5:55 PM</div>
+                  <div class="speaker">Introduction</div>
+					  			<!-- <div class="speaker">Speaker</div>
+					  			<div class="subject">Project</div>
+					  			<div class="venue">Subject</div> -->
+					  		</li>
+
+                <li class="schedule-details">
+                  <div class="block">
+
+                    <div class="time" >
+                      <!-- <i class="fa fa-clock-o"></i>
+                      <span class="time">9.00 AM</span> -->
+                      <div id="whoIsPresidingOfficer">TBA</div>
+                    </div>
+                    <!-- Speaker -->
+                    <div class="speaker">
+                      <!-- <img src="images/speakers/speaker-thumb-one.jpg" alt="speaker-thumb-one"> -->
+                      <span class="name">Presiding Officer</span>
+                    </div>
+                    <!-- Subject -->
+                    <div class="subject" ></div>
+                    <!-- Venue -->
+                    <div class="venue"></div>
+                  </div>
+                </li>
+
+                <li class="schedule-details">
+                  <div class="block">
+                    <!-- time -->
+                    <div class="time" >
+                      <!-- <i class="fa fa-clock-o"></i>
+                      <span class="time">9.00 AM</span> -->
+                      <div id="whoIsToastmaster">TBA</div>
+                    </div>
+                    <!-- Speaker -->
+                    <div class="speaker">
+                      <!-- <img src="images/speakers/speaker-thumb-one.jpg" alt="speaker-thumb-one"> -->
+                      <span class="name">Toastmaster of the Evening</span>
+                    </div>
+                    <!-- Subject -->
+                    <div class="subject" ></div>
+                    <!-- Venue -->
+                    <div class="venue"></div>
+                  </div>
+                </li>
+
+                <li class="schedule-details">
+                  <div class="block">
+                    <!-- time -->
+                    <div class="time" >
+                      <!-- <i class="fa fa-clock-o"></i>
+                      <span class="time">9.00 AM</span> -->
+                      <div id="whoIsGrammarian">TBA</div>
+                    </div>
+                    <!-- Speaker -->
+                    <div class="speaker">
+                      <!-- <img src="images/speakers/speaker-thumb-one.jpg" alt="speaker-thumb-one"> -->
+                      <span class="name">Grammarian</span>
+                    </div>
+                    <!-- Subject -->
+                    <div class="subject" ></div>
+                    <!-- Venue -->
+                    <div class="venue"></div>
+                  </div>
+                </li>
+
+                <li class="schedule-details">
+                  <div class="block">
+                    <!-- time -->
+                    <div class="time" >
+                      <!-- <i class="fa fa-clock-o"></i>
+                      <span class="time">9.00 AM</span> -->
+                      <div id="whoIsAhCounter">TBA</div>
+                    </div>
+                    <!-- Speaker -->
+                    <div class="speaker">
+                      <!-- <img src="images/speakers/speaker-thumb-one.jpg" alt="speaker-thumb-one"> -->
+                      <span class="name">Ah Counter</span>
+                    </div>
+                    <!-- Subject -->
+                    <div class="subject" ></div>
+                    <!-- Venue -->
+                    <div class="venue"></div>
+                  </div>
+                </li>
+
+                <li class="schedule-details">
+                  <div class="block">
+                    <!-- time -->
+                    <div class="time" >
+                      <!-- <i class="fa fa-clock-o"></i>
+                      <span class="time">9.00 AM</span> -->
+                      <div id="whoIsTimeKeeper">TBA</div>
+                    </div>
+                    <!-- Speaker -->
+                    <div class="speaker">
+                      <!-- <img src="images/speakers/speaker-thumb-one.jpg" alt="speaker-thumb-one"> -->
+                      <span class="name">Time Keeper</span>
+                    </div>
+                    <!-- Subject -->
+                    <div class="subject" ></div>
+                    <!-- Venue -->
+                    <div class="venue"></div>
+                  </div>
+                </li>
+
+                <li class="schedule-details">
+                  <div class="block">
+                    <!-- time -->
+                    <div class="time" >
+                      <!-- <i class="fa fa-clock-o"></i>
+                      <span class="time">9.00 AM</span> -->
+                      <div id="whoIsVoteCounter">TBA</div>
+                    </div>
+                    <!-- Speaker -->
+                    <div class="speaker">
+                      <!-- <img src="images/speakers/speaker-thumb-one.jpg" alt="speaker-thumb-one"> -->
+                      <span class="name">Vote Counter</span>
+                    </div>
+                    <!-- Subject -->
+                    <div class="subject" ></div>
+                    <!-- Venue -->
+                    <div class="venue"></div>
+                  </div>
+                </li>
+
+                <li class="schedule-details">
+                  <div class="block">
+                    <!-- time -->
+                    <div class="time" >
+                      <!-- <i class="fa fa-clock-o"></i>
+                      <span class="time">9.00 AM</span> -->
+                      <div id="whoIsTechMaster">TBA</div>
+                    </div>
+                    <!-- Speaker -->
+                    <div class="speaker">
+                      <!-- <img src="images/speakers/speaker-thumb-one.jpg" alt="speaker-thumb-one"> -->
+                      <span class="name">Tech-Master</span>
+                    </div>
+                    <!-- Subject -->
+                    <div class="subject" ></div>
+                    <!-- Venue -->
+                    <div class="venue"></div>
+                  </div>
+                </li>
+              </ul>
+
+
+              <!-- Headings -->
+					  	<ul class="m-0 p-0">
+					  		<li class="headings">
+					  			<div class="time">6:05 PM</div>
+                  <div class="speaker">Prepared Speeches</div>
+					  			<!--
+					  			<div class="subject">Project</div>
+					  			<div class="venue">Subject</div> -->
+					  		</li>
+					  		<!-- Schedule Details -->
+					  		<li class="schedule-details">
+					  			<div class="block">
+					  				<!-- time -->
+							  		<div class="time" >
+							  			<!-- <i class="fa fa-clock-o"></i>
+							  			<span class="time">9.00 AM</span> -->
+                      <div id="whoIsSpeaker1">TBA</div>
+							  		</div>
+							  		<!-- Speaker -->
+							  		<div class="speaker">
+							  			<!-- <img src="images/speakers/speaker-thumb-one.jpg" alt="speaker-thumb-one"> -->
+                      <span class="name"  id="whatSpeech1"></span>
+							  		</div>
+							  		<!-- Subject -->
+							  		<div class="subject" ></div>
+							  		<!-- Venue -->
+							  		<div class="venue"></div>
+					  			</div>
+					  		</li>
+                <!-- Schedule Details -->
+					  		<li class="schedule-details">
+					  			<div class="block">
+							  		<div class="time" >
+                      <div id="whoIsSpeaker2"></div>
+							  		</div>
+							  		<div class="speaker">
+										<span class="name" id="whatSpeech2">TBA</span>
+							  		</div>
+					  			</div>
+					  		</li>
+                <!-- Schedule Details -->
+					  		<li class="schedule-details">
+					  			<div class="block">
+							  		<div class="time" >
+                      <div id="whoIsSpeaker3"></div>
+							  		</div>
+							  		<div class="speaker">
+										<span class="name" id="whatSpeech3">TBA</span>
+							  		</div>
+					  			</div>
+					  		</li>
+					  	</ul>
+
+
+
+              <ul class="m-0 p-0">
+					  		<li class="headings">
+					  			<div class="time">6:35 PM</div>
+					  			<div class="speaker">TableTopics</div>
+					  			<!-- <div class="speaker">Speaker</div>
+					  			<div class="subject">Project</div>
+					  			<div class="venue">Subject</div> -->
+					  		</li>
+					  		<!-- Schedule Details -->
+					  		<li class="schedule-details">
+					  			<div class="block">
+					  				<!-- time -->
+							  		<div class="time" id="whoIsTopicsMaster">
+							  			<!-- <i class="fa fa-clock-o"></i>
+							  			<span class="time">9.00 AM</span> -->
+							  		</div>
+							  		<!-- Speaker -->
+							  		<div class="speaker">
+							  			<!-- <img src="images/speakers/speaker-thumb-one.jpg" alt="speaker-thumb-one"> -->
+										<span class="name" >TopicsMaster</span>
+							  		</div>
+							  		<!-- Subject -->
+							  		<div class="subject"></div>
+							  		<!-- Venue -->
+							  		<div class="venue" ></div>
+					  			</div>
+					  		</li>
+					  		<!-- Schedule Details -->
+					  		<li class="schedule-details">
+					  			<div class="block">
+						  			<!-- time -->
+							  		<div class="time">
+
+
+							  		</div>
+							  		<!-- Speaker -->
+							  		<div class="speaker">
+							  			<!-- <img src="images/speakers/speaker-thumb-two.jpg" alt="speaker-thumb-two"> -->
+										<span class="name">Table Topics</span>
+							  		</div>
+							  		<!-- Subject -->
+							  		<div class="subject"></div>
+							  		<!-- Venue -->
+							  		<div class="venue">
+                      <i class="fa fa-clock-o"></i>
+							  			<span class="time">1-2 min each</span>
+                    </div>
+					  			</div>
+					  		</li>
+					  	</ul>
+
+              <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+              <ul class="m-0 p-0">
+					  		<li class="headings">
+					  			<div class="time">6:50 PM</div>
+                  <div class="speaker">Evaluation</div>
+					  			<!-- <div class="speaker">Speaker</div>
+					  			<div class="subject">Project</div>
+					  			<div class="venue">Subject</div> -->
+					  		</li>
+                <!-- Schedule Details -->
+					  		<li class="schedule-details">
+					  			<div class="block">
+					  				<!-- time -->
+							  		<div class="time" id="whoIsGeneralEvaluator">
+
+							  			<!-- <i class="fa fa-clock-o"></i>
+							  			<span class="time">2-3 min</span> -->
+							  		</div>
+							  		<!-- Speaker -->
+							  		<div class="speaker" >
+							  			<!-- <img src="images/speakers/speaker-thumb-one.jpg" alt="speaker-thumb-one"> -->
+										<span class="name"  > General Evaluator</span>
+							  		</div>
+							  		<!-- Subject -->
+							  		<div class="subject"></div>
+							  		<!-- Venue -->
+							  		<div class="venue" ></div>
+					  			</div>
+					  		</li>
+					  		<!-- Schedule Details -->
+					  		<li class="schedule-details">
+					  			<div class="block">
+					  				<!-- time -->
+							  		<div class="time" id="whoIsEvaluator1">
+
+							  		</div>
+							  		<!-- Speaker -->
+							  		<div class="speaker">
+							  			<!-- <img src="images/speakers/speaker-thumb-one.jpg" alt="speaker-thumb-one"> -->
+										<span class="name">Evaluation of the 1st Speech</span>
+							  		</div>
+							  		<!-- Subject -->
+							  		<div class="subject"></div>
+							  		<!-- Venue -->
+							  		<div class="venue"  >
+							  			<i class="fa fa-clock-o"></i>
+							  			<!-- <span class="time"></span> -->
+                      2-3 min
+                    </div>
+					  			</div>
+					  		</li>
+					  		<!-- Schedule Details -->
+                <li class="schedule-details">
+					  			<div class="block">
+							  		<div class="time" id="whoIsEvaluator2">
+							  		</div>
+							  		<div class="speaker">
+										<span class="name">Evaluation of the 2nd Speech</span>
+							  		</div>
+							  		<div class="subject"></div>
+							  		<div class="venue"  >
+							  			<i class="fa fa-clock-o"></i>
+                      2-3 min
+                    </div>
+					  			</div>
+					  		</li>
+					  		<!-- Schedule Details -->
+                <li class="schedule-details">
+                  <div class="block">
+                    <div class="time" id="whoIsEvaluator3">
+                    </div>
+                    <div class="speaker">
+                    <span class="name">Evaluation of the 3rd Speech</span>
+                    </div>
+                    <div class="subject"></div>
+                    <div class="venue"  >
+                      <i class="fa fa-clock-o"></i>
+                      2-3 min
+                    </div>
+                  </div>
+                </li>
+
+                <!-- Schedule Details -->
+                <li class="schedule-details">
+                  <div class="block">
+                    <div class="time" id="whoIsTableTopicsEvaluator">
+                    </div>
+                    <div class="speaker">
+                    <span class="name">Table Topics Evaluation</span>
+                    </div>
+                    <div class="subject"></div>
+                    <div class="venue"  >
+                      <i class="fa fa-clock-o"></i>
+                      2-3 min
+                    </div>
+                  </div>
+                </li>
+
+					  	</ul>
+
+
+
+              <ul class="m-0 p-0">
+					  		<li class="headings">
+					  			<div class="time">7:10 PM</div>
+                  <div class="speaker">Awards</div>
+					  			<!-- <div class="speaker">Speaker</div>
+					  			<div class="subject">Project</div>
+					  			<div class="venue">Subject</div> -->
+					  		</li>
+              </ul>
+
+					  </div>
+					</div>
+
+			</div>
+		</div>
+	</div>
+	</div>
+</section>
+
+<script>
+	document.addEventListener('google_sheets_loaded', function(e) {
+	// after getting meeting col
+      // In the javascript world months begin with zero! kind of weird to me. Anyhow, 9 is NOT September, but rather 9 is October.
+      toastiesSheet.members = toastiesSheet.listMembers();
+      console.log(`today: ${today}`)
+      signupSheet.meetingCol = signupSheet.getMeetingCol(today);
+      console.log(`today: ${today}`)
+      signupSheet.members = toastiesSheet.members;
+      signupSheet.roles = signupSheet.getColumn(signupSheet.meetingCol);
+
+      // first, only compute points for today
+      // scan this person, if in role, get points
+      // console.warn(signupSheet.roles)
+      // console.log(toastiesSheet.members)
+      // console.log(signupSheet.meetingCol)
+      toastiesPoints = signupSheet.getToastyPoints();
+      $("#theme").html(signupSheet.roles['Theme']);
+      $("#desc").html(signupSheet.roles['Description']);
+      $("#when_where").html(signupSheet.roles['Date'] + ' ' + signupSheet.roles['Room']);
+      signupSheet.fillInForm();
+
+      // -----------------------------
+      //  Count Down JS
+      // -----------------------------
+      $('.timer').syotimer({
+          year: now.getFullYear(),
+          month: now.getMonth()+1,
+          day: now.getDate()+1,
+          hour: 18,
+          minute: 0
+      });
+  });
+</script>
+
+<!--====  End of Schedule  ====-->

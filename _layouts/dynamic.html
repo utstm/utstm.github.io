@@ -1,0 +1,62 @@
+---
+layout: default
+---
+
+
+
+<!-- <p>{{ page.date }} - Written by {{ page.author }}</p> -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.min.js"> -->
+<script type="text/javascript"  src="core/shuffle.js" ></script>
+<script type="text/javascript"  src="core/date.js" ></script>
+<script type="text/javascript"  src="core/load_meeting_info.js" ></script>
+<!-- <script type="text/javascript"  src="js/growth.js" ></script> -->
+<script type="text/javascript">
+// var URL_SIGNUPSHEET = "https://spreadsheets.google.com/feeds/cells/17Vtxbeh7Q6-ic89sWC8_U8RUoUAr6dlvi3jxADRMNQU/2/public/full?alt=json";
+// var URL_TOASTIESSHEET = "https://spreadsheets.google.com/feeds/cells/1E9VdBM1YSS0ykQG-U8yAopu8a2c9_G9U66DG_pmBmw4/1/public/full?alt=json";
+// old api is inconvenient because it skips empty cells and don't allow accessing via sheetname (sheet index is needed, so we put the sheet always the second sheets)
+// getData(row, col) {
+// 	let entry = this.entry;
+// 	row = '' + row // to string
+// 	col = '' + col
+// 	for (let i = 0; i < entry.length; i++) {
+// 		if(entry[i].gs$cell.row == row && entry[i].gs$cell.col == col) {
+// 			return  entry[i].content.$t;
+// 		}
+// 	}
+// }
+var signupSheet;
+var toastiesSheet;
+var toastiesPoints;
+var date = getUrlVars()["date"]
+var member = getUrlVars()["member"]; //'Zoe'; //"Shaheer"; // 'Zoe'; // getUrlVars()["member"]
+var now = (date == undefined)? new Date() : new Date(date);
+var today = now.getDateWithoutTime()
+console.warn(`today: ${today}`)
+
+$(document).ready(function() {
+  var SIGNUPSHEET_ID = '17Vtxbeh7Q6-ic89sWC8_U8RUoUAr6dlvi3jxADRMNQU';
+  var TOASTIESSHEET_ID = '1E9VdBM1YSS0ykQG-U8yAopu8a2c9_G9U66DG_pmBmw4';
+  toastiesSheet = new ToastiesSheet(TOASTIESSHEET_ID, "2021");
+
+  var sheetname = SignupSheet.getMeetingSheetName(today);
+  console.log(`sheetname: ${sheetname}`)
+  signupSheet = new SignupSheet(SIGNUPSHEET_ID, encodeURIComponent(sheetname)); // "Aug+%2721-Sept+%2721"
+  // wait for all sheets are loaded
+  // first prepare listener
+  console.log("document is ready")
+  var members_loaded = new Promise(function(resolve) {
+      document.addEventListener("loaded_ToastiesSheet",resolve,false);
+  })
+  var roles_loaded = new Promise(function(resolve) {
+      document.addEventListener("loaded_SignupSheet", resolve, false);
+  })
+  Promise.all([members_loaded, roles_loaded]).then(function() {
+
+      document.dispatchEvent(new Event('google_sheets_loaded'));
+  });
+});
+</script>
+
+
+{{ content }}
