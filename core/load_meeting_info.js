@@ -272,25 +272,25 @@ class SignupSheet extends SheetV4{
   }
   nextMeeting() {
     // not working properly
-    // location.href = window.location.origin + '/agenda.html?date='+this.date.addDays(8).yyyymmdd();
+    // location.href = window.location.origin + '/index.html?date='+this.date.addDays(8).yyyymmdd();
     // console.log(location.href)
-    let url = window.location.origin + '/agenda.html?date='+this.date.addDays(8).yyyymmdd();
+    let url = window.location.origin + '/index.html?date='+this.date.addDays(8).yyyymmdd();
     location.replace(url)
     return false
   }
   thisMeeting() {
-    let url = window.location.origin + '/agenda.html';
+    let url = window.location.origin + '/index.html';
     location.replace(url)
     return false
   }
   throwback2020() {
-    let url = window.location.origin + '/agenda.html?date='+this.date.addYears(-1).yyyymmdd();
+    let url = window.location.origin + '/index.html?date='+this.date.addYears(-1).yyyymmdd();
     location.replace(url)
     // console.log(location.href)
     return false
   }
   prevMeeting() {
-    let url = window.location.origin + '/agenda.html?date='+this.date.addDays(-7).yyyymmdd();
+    let url = window.location.origin + '/index.html?date='+this.date.addDays(-7).yyyymmdd();
     // console.log(location.href)
     location.replace(url)
     return false
@@ -375,7 +375,7 @@ class SignupSheet extends SheetV4{
           $("#boxtimeline").append(`
           <div class="timeline-item" >
             <div class="timeline-img"></div>
-            <div class="timeline-content js--fadeInLeft" style="background-color:${  (meeting_points > 0)? 'transparent':'gray'}">
+            <div class="timeline-content js--fadeInLeft" style="background-color:${  (meeting_points > 0)? 'transparent':'#b9b9b9'}">
               <h2 align=center>${column_data['Theme']}</h2>
               <div class="date">${column_data['Date']}</div>
               <ul class="list-group">

@@ -1,6 +1,3 @@
----
-layout: dynamic
----
 
 <!--============================
 =            Banner            =
@@ -17,15 +14,42 @@ layout: dynamic
           <!-- <i style="color:white">Upcoming</i> -->
 					<h1 id="theme"></h1>
 					<h2 id="desc" style="text-transform: none"></h2>
-					<h6 id="when_where">02-05 July 2017 California</h6>
+					<h6 id="when_where"></h6>
 					<!-- Action Button -->
 					<!-- <a href="#" class="btn btn-white-md">get ticket now</a> -->
 					<a href="https://utexas.zoom.us/j/91041356319" class="btn btn-white-md">JOIN ZOOM</a>
 				</div>
-			</div>
+	      <!-- <img class="d-block w-100" src="..." alt="First slide"> -->
+	    </div>
 		</div>
 	</div>
 </section>
+
+
+<!-- <nav aria-label="Page navigation example">
+	<ul class="pagination justify-content-left">
+		<li class="page-item">
+			<a class="page-link" href="#" onclick="signupSheet.throwback2020()">Throwback 2020</a>
+		</li>
+		<li class="page-item">
+			<a class="page-link" href="#" onclick="signupSheet.thisMeeting()">Today</a>
+		</li>
+	</ul>
+</nav>
+
+<nav aria-label="Page navigation example">
+	<ul class="pagination justify-content-left">
+		<li class="page-item">
+			<a class="page-link" href="#" tabindex="-1" onclick="signupSheet.prevMeeting()">Previous</a>
+		</li>
+		<li class="page-item"><a class="page-link" href="#">2</a></li>
+		<li class="page-item"><a class="page-link" href="#" id="meetingNo"></a></li>
+
+		<li class="page-item">
+			<a class="page-link" href="#" onclick="signupSheet.nextMeeting()">Next</a>
+		</li>
+	</ul>
+</nav> -->
 
 <!--====  End of Banner  ====-->
 
@@ -109,6 +133,10 @@ layout: dynamic
             Below is a list of our supporting roles.
           </p> -->
           <a href="https://docs.google.com/spreadsheets/d/17Vtxbeh7Q6-ic89sWC8_U8RUoUAr6dlvi3jxADRMNQU/" class="btn btn-main-md">Signup roles</a>
+
+					<br/>
+
+
 				</div>
 			</div>
 		</div>
@@ -540,19 +568,25 @@ layout: dynamic
       toastiesPoints = signupSheet.getToastyPoints();
       $("#theme").html(signupSheet.roles['Theme']);
       $("#desc").html(signupSheet.roles['Description']);
-      $("#when_where").html(signupSheet.roles['Date'] + ' ' + signupSheet.roles['Room']);
+      $("#when_where").html('5:55 PM ~ 7:15 PM, ' + signupSheet.roles['Date'] + ', ' + signupSheet.roles['Room']);
       signupSheet.fillInForm();
+			signupSheet.getDateOfColumn(signupSheet.roles).getTime()
 
       // -----------------------------
       //  Count Down JS
       // -----------------------------
-      $('.timer').syotimer({
-          year: now.getFullYear(),
-          month: now.getMonth()+1,
-          day: now.getDate()+1,
-          hour: 18,
-          minute: 0
-      });
+
+			// only count down future events
+			if (new Date() < signupSheet.getDateOfColumn(signupSheet.roles).getTime()) {
+				$('.timer').syotimer({
+	          year: now.getFullYear(),
+	          month: now.getMonth()+1,
+	          day: now.getDate()+1,
+	          hour: 18,
+	          minute: 0
+	      });
+			}
+
   });
 </script>
 
