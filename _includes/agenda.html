@@ -9,7 +9,7 @@
 =            Banner            =
 =============================-->
 
-<section class="banner bg-banner-one overlay">
+<section class="banner bg-banner-one overlay" style="height:80vh">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12">
@@ -138,42 +138,37 @@
             The success of a club meeting depends on the participants. At each meeting, there are many roles to fill and they play an important part in making the club experience enjoyable.
             Below is a list of our supporting roles.
           </p> -->
-          <a href="https://docs.google.com/spreadsheets/d/17Vtxbeh7Q6-ic89sWC8_U8RUoUAr6dlvi3jxADRMNQU/" class="btn btn-main-md">Signup roles</a>
-
-					<br/>
-
-
 				</div>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-12">
 
-
-				<!-- <div class="schedule-tab">
+				<div class="schedule-tab">
 					<ul class="nav nav-pills text-center">
 					  <li class="nav-item">
-					    <a class="nav-link active" href="#nov20" data-toggle="pill">
-					    	Main
-					    	<span>Prepared Speeches</span>
+					    <a class="nav-link " onclick="signupSheet.prevMeeting()" data-toggle="pill">
+					    	Last week
+					    	<span id="themeLast">TBA</span>
 					    </a>
 					  </li>
 					  <li class="nav-item">
-					    <a class="nav-link" href="#nov21" data-toggle="pill">
-							TableTopics
-					    	<span>Impromptu Speeches</span>
+					    <a class="nav-link active" onclick="signupSheet.thisMeeting()" data-toggle="pill">
+							This week
+					    	<span id="themeThis">TBA</span>
 					    </a>
 					  </li>
 					  <li class="nav-item">
-					    <a class="nav-link" href="#nov22" data-toggle="pill">
-							Evaluation
-					    	<span>Feedback</span>
+					    <a class="nav-link" onclick="signupSheet.nextMeeting()" data-toggle="pill">
+							Next Week
+					    	<span id="themeNext">TBA</span>
 					    </a>
 					  </li>
 					</ul>
-				</div> -->
+				</div>
 
-        <div class="schedule-contents bg-schedule">
+        <div class="schedule-contents">
+          <!-- bg-schedule -->
 					<div class="tab-content" id="pills-tabContent">
 					  <div class="tab-pane fade show active schedule-item" id="nov20">
               <ul class="m-0 p-0">
@@ -337,7 +332,7 @@
 					  			<div class="venue">Subject</div> -->
 					  		</li>
 					  		<!-- Schedule Details -->
-					  		<li class="schedule-details">
+					  		<li class="schedule-details" id="speech1">
 					  			<div class="block">
 					  				<!-- time -->
 							  		<div class="time truncate" >
@@ -357,7 +352,7 @@
 					  			</div>
 					  		</li>
                 <!-- Schedule Details -->
-					  		<li class="schedule-details">
+					  		<li class="schedule-details" id="speech2">
 					  			<div class="block">
 							  		<div class="time truncate" >
                       <div id="whoIsSpeaker2"></div>
@@ -368,7 +363,7 @@
 					  			</div>
 					  		</li>
                 <!-- Schedule Details -->
-					  		<li class="schedule-details">
+					  		<li class="schedule-details" id="speech3">
 					  			<div class="block">
 							  		<div class="time truncate" >
                       <div id="whoIsSpeaker3"></div>
@@ -464,7 +459,7 @@
 					  			</div>
 					  		</li>
 					  		<!-- Schedule Details -->
-					  		<li class="schedule-details">
+					  		<li class="schedule-details" id="eval1">
 					  			<div class="block">
 					  				<!-- time -->
 							  		<div class="time truncate" id="whoIsEvaluator1">
@@ -486,7 +481,7 @@
 					  			</div>
 					  		</li>
 					  		<!-- Schedule Details -->
-                <li class="schedule-details">
+                <li class="schedule-details" id="eval2">
 					  			<div class="block">
 							  		<div class="time truncate" id="whoIsEvaluator2">
 							  		</div>
@@ -501,7 +496,7 @@
 					  			</div>
 					  		</li>
 					  		<!-- Schedule Details -->
-                <li class="schedule-details">
+                <li class="schedule-details" id="eval3">
                   <div class="block">
                     <div class="time truncate" id="whoIsEvaluator3">
                     </div>
@@ -560,39 +555,13 @@
 	// after getting meeting col
       // In the javascript world months begin with zero! kind of weird to me. Anyhow, 9 is NOT September, but rather 9 is October.
       toastiesSheet.members = toastiesSheet.listMembers();
-      console.log(`today: ${today}`)
-      signupSheet.meetingCol = signupSheet.getMeetingCol(today);
-      console.log(`today: ${today}`)
       signupSheet.members = toastiesSheet.members;
-      signupSheet.roles = signupSheet.getColumn(signupSheet.meetingCol);
-
       // first, only compute points for today
       // scan this person, if in role, get points
       // console.warn(signupSheet.roles)
       // console.log(toastiesSheet.members)
       // console.log(signupSheet.meetingCol)
-      toastiesPoints = signupSheet.getToastyPoints();
-      $("#theme").html(signupSheet.roles['Theme']);
-      $("#desc").html(signupSheet.roles['Description']);
-      $("#when_where").html('5:55 PM ~ 7:15 PM, ' + signupSheet.roles['Date'] + ', ' + signupSheet.roles['Room']);
-      signupSheet.fillInForm();
-			signupSheet.getDateOfColumn(signupSheet.roles).getTime()
-
-      // -----------------------------
-      //  Count Down JS
-      // -----------------------------
-
-			// only count down future events
-			if (new Date() < signupSheet.getDateOfColumn(signupSheet.roles).getTime()) {
-				$('.timer').syotimer({
-	          year: now.getFullYear(),
-	          month: now.getMonth()+1,
-	          day: now.getDate()+1,
-	          hour: 18,
-	          minute: 0
-	      });
-			}
-
+      signupSheet.showAgendaByDate(today);
   });
 </script>
 

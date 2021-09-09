@@ -111,10 +111,12 @@ var SCORES = {
 class SheetV4 {
   constructor(spreadsheetId, sheetname=null) {
     var json;
+    this.sheename = sheetname
     console.log('---' + this.constructor.name);
     var url = `https://docs.google.com/spreadsheets/d/${spreadsheetId}/gviz/tq?tqx=out:json`;
     if (sheetname != null) {
       url += '&sheet=' + sheetname
+
     }
     fetch(url)
         .then(res => res.text())
@@ -237,7 +239,10 @@ class SignupSheet extends SheetV4{
     return res
   }
   getMeetingCol(date_now) {
+    // data is always the first row
+    // theme is the third row
     var date_row = this.table.rows[0].c;
+    var theme_row = this.table.rows[3].c;
     // let date_now = date.getDateWithoutTime().addDays(1); // so weird
     this.date = date_now;
     var index, cell;
@@ -267,21 +272,61 @@ class SignupSheet extends SheetV4{
       }
     }
     var meeting_col = index;
-    console.log(`meeting_col: ${meeting_col}`)
+    console.warn(`meeting_col: ${meeting_col}`)
+    if(theme_row[meeting_col-1]!=null) {$("#themeLast").html(theme_row[meeting_col-1].v);}
+    if(theme_row[meeting_col]!=null) {$("#themeThis").html(theme_row[meeting_col].v);}
+    if(theme_row[meeting_col+1]!=null) {$("#themeNext").html(theme_row[meeting_col+1].v);}
     return meeting_col;
+  }
+  showAgendaByColumn(col) {
+    // assert col is in the valid range
+    // can do without reload sheet
+    // will also need to locate the sheetname again (if for older meetings)
+    this.meetingCol = col;
+    // console.log(`today: ${date}`)
+    this.roles = this.getColumn(this.meetingCol);
+    $("#theme").html(this.roles['Theme']);
+    $("#desc").html(this.roles['Description']);
+    $("#when_where").html('5:55 PM ~ 7:15 PM, ' + this.roles['Date'] + ', ' + this.roles['Room']);
+    this.fillInForm();
+    // -----------------------------
+    //  Count Down JS
+    // -----------------------------
+    // only count down future events
+    let target = this.getDateOfColumn(this.roles).getDateWithoutTime();
+    $('.timer').html(""); //empty existing first
+    // haven't reach target date
+    if (new Date() < target) {
+      $('.timer').syotimer({
+          year: target.getFullYear(),
+          month: target.getMonth()+1,
+          day: target.getDate(),
+          hour: 18,
+          minute: 0
+      });
+    }
+  }
+  showAgendaByDate(date) {
+    if ((this.sheename != null) && (this.sheename == SignupSheet.getMeetingSheetName(date))) {
+      // can do without reload sheet
+      this.showAgendaByColumn(this.getMeetingCol(date));
+    } else {
+      // has to load from another sheet
+      let url = window.location.origin + '/index.html?date='+date.yyyymmdd();
+      location.replace(url)
+    }
   }
   nextMeeting() {
     // not working properly
     // location.href = window.location.origin + '/index.html?date='+this.date.addDays(8).yyyymmdd();
     // console.log(location.href)
-    let url = window.location.origin + '/index.html?date='+this.date.addDays(8).yyyymmdd();
-    location.replace(url)
-    return false
+    this.showAgendaByColumn(meetingColToday + 1);
+    // let url = window.location.origin + '/index.html?date='+this.date.addDays(8).yyyymmdd();
+    // location.replace(url)
+    // return false
   }
   thisMeeting() {
-    let url = window.location.origin + '/index.html';
-    location.replace(url)
-    return false
+    this.showAgendaByColumn(meetingColToday);
   }
   throwback2020() {
     let url = window.location.origin + '/index.html?date='+this.date.addYears(-1).yyyymmdd();
@@ -290,15 +335,17 @@ class SignupSheet extends SheetV4{
     return false
   }
   prevMeeting() {
-    let url = window.location.origin + '/index.html?date='+this.date.addDays(-7).yyyymmdd();
-    // console.log(location.href)
-    location.replace(url)
-    return false
+    this.showAgendaByColumn(meetingColToday - 1);
+    // let url = window.location.origin + '/index.html?date='+this.date.addDays(-7).yyyymmdd();
+    // // console.log(location.href)
+    // location.replace(url)
+    // return false
   }
   // get leader board
-  getToastyPoints(member=null) {
+  getToastyPoints(member) {
     var short_names = Object.keys(this.members);
     var points = {...this.members};
+    var meeting_points = {...this.members};
 
     for(let name in points) {
       points[name] = 0; // init as zero
@@ -322,7 +369,9 @@ class SignupSheet extends SheetV4{
       //   });
       // }
     for (let col=1; col<=this.meetingCol; col++) {
-      let meeting_points = 0; // one member
+      for(let name in meeting_points) {
+        meeting_points[name] = 0; // init as zero
+      }
       let column_data = this.getColumn(col);
 
       let li_items = '';
@@ -332,7 +381,7 @@ class SignupSheet extends SheetV4{
      // console.warn(column_data['Date'])
      // if (column_data['Date'].getDate() <= 7) {
        // reset all members
-       if (member != null) {
+       if (member != undefined) {
          if (points[member] >0) {
            li_items += `<li class="list-group-item d-flex justify-content-between align-items-center">
            <span class="badge badge-primary badge-pill">-${points[member]}</span>
@@ -341,7 +390,13 @@ class SignupSheet extends SheetV4{
          }
        }
        for(let name in points) {
-         points[name] = 0; // init as zero
+         if( (member == undefined) & (points[name] != 0) ) {
+           li_items += `<li class="list-group-item d-flex justify-content-between align-items-center">
+           <span class="badge badge-primary badge-pill">-${points[name]}</span>
+             ${name} (Reset)
+           </li>`;
+         }
+         points[name] = 0; // reset
        }
      }
       // SCORES
@@ -356,10 +411,9 @@ class SignupSheet extends SheetV4{
               if (reward_member in this.members) {
                 let pts = getPoints(item);
                 pts = (pts==undefined)? SCORES[key] : parseInt(pts);
-                points[reward_member] += pts;
+                meeting_points[reward_member] += pts;
                 console.warn(`${reward_member}: +${pts}`);
                 if(member == reward_member ){
-                  meeting_points +=  pts;
                   // Ad in Adi
                   li_items += `<li class="list-group-item d-flex justify-content-between align-items-center">
                   <span class="badge badge-primary badge-pill">+${pts}</span>
@@ -371,21 +425,29 @@ class SignupSheet extends SheetV4{
           }
         }
       }
-      if (member != null) {
-          $("#boxtimeline").append(`
-          <div class="timeline-item" >
-            <div class="timeline-img"></div>
-            <div class="timeline-content js--fadeInLeft" style="background-color:${  (meeting_points > 0)? 'transparent':'#b9b9b9'}">
-              <h2 align=center>${column_data['Theme']}</h2>
-              <div class="date">${column_data['Date']}</div>
-              <ul class="list-group">
-                ${li_items}
-              </ul>
-            </div>
-          </div>`);
+      // each meeting summary
+      for(let name in points) {
+        points[name] += meeting_points[name]; // init as zero
+        if( (member == undefined) & (meeting_points[name] != 0) ) {
+          li_items += `<li class="list-group-item d-flex justify-content-between align-items-center">
+          <span class="badge badge-primary badge-pill">+${meeting_points[name]}</span>
+            ${name}
+          </li>`;
+        }
       }
+      $("#boxtimeline").append(`
+      <div class="timeline-item" >
+        <div class="timeline-img"></div>
+        <div class="timeline-content js--fadeInLeft" style="background-color:${  ( (member == undefined) | (meeting_points[member] > 0) )? 'transparent':'#b9b9b9'}">
+          <h2 align=center>${column_data['Theme']}</h2>
+          <div class="date">${column_data['Date']}</div>
+          <ul class="list-group">
+            ${li_items}
+          </ul>
+        </div>
+      </div>`);
     }
-    if (member != null) {
+    if (member != undefined) {
       $("#member_score").html(`${points[member]} Points Earned~`);
     }
     console.log(points)
@@ -421,7 +483,7 @@ class SignupSheet extends SheetV4{
     }
     //get full name if possible
     // dangerous: result = this.members[result]['full_name']
-    return (result == null)? 'TBA' : result;
+    return (result == null)? '' : result; // note it return empty string
   }
   who_is_in(role) {
     let s = whois(role);
@@ -476,7 +538,8 @@ class SignupSheet extends SheetV4{
           result += short_name;
         }
       }
-      $(element).html( (result=='')?`TBA`:result);
+      $(element).html( (result=='')?`<a href="https://docs.google.com/spreadsheets/d/17Vtxbeh7Q6-ic89sWC8_U8RUoUAr6dlvi3jxADRMNQU/"
+      class="btn btn-main-sm" style='padding:2px'>Signup role</a>`:result);
   }
   fillInInfo(role, element) {
       let s = this.whereis(role);
@@ -502,23 +565,26 @@ class SignupSheet extends SheetV4{
     // add those who already assigned
 
     // disable speech role suggestion, don't show it if there are no speaker
-    if ($('#whoIsSpeaker1').text() == 'TBA') {
-      $('#whoIsSpeaker1').html('&nbsp;')
-      $('#whatSpeech1').html('&nbsp;')
-      $('#whoIsEvaluator1').html('&nbsp;')
-      $('#eval1').html('&nbsp;')
+    if ($('#whoIsSpeaker1').text() == 'NA') {
+      $('#speech1').hide();
+      $('#eval1').hide();
+    } else {
+      $('#speech1').show();
+      $('#eval1').show();
     }
-    if ($('#whoIsSpeaker2').text() == 'TBA') {
-      $('#whoIsSpeaker2').html('&nbsp;')
-      $('#whatSpeech2').html('&nbsp;')
-      $('#whoIsEvaluator2').html('&nbsp;')
-      $('#eval2').html('&nbsp;')
+    if ($('#whoIsSpeaker2').text() == 'NA') {
+      $('#speech2').hide();
+      $('#eval2').hide();
+    } else {
+      $('#speech2').show();
+      $('#eval2').show();
     }
-    if ($('#whoIsSpeaker3').text() == 'TBA') {
-      $('#whoIsSpeaker3').html('&nbsp;')
-      $('#whatSpeech3').html('&nbsp;')
-      $('#whoIsEvaluator3').html('&nbsp;')
-      $('#eval3').html('&nbsp;')
+    if ($('#whoIsSpeaker3').text() == 'NA') {
+      $('#speech3').hide();
+      $('#eval3').hide();
+    } else {
+      $('#speech3').show();
+      $('#eval3').show();
     }
     //////// disable fillInSuggestion for now (add a switch to control showing it)
     // for(var element in roles) {
