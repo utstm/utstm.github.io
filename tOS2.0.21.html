@@ -212,10 +212,11 @@ document.addEventListener('google_sheets_loaded', function(e) {
     $(document).keypress(function(e) {
       if(e.which == 13) {
         // enter pressed
-        version2=false;markZero=false;
+        version2=false;
+        markZero=false;
         if(p5obj!=undefined){p5obj.remove();}
         startSketch(tos2019ptsZero);
-      } else if (e.which == 82) { // 'r'
+      } else if (e.which == 32 ) { // 82 'r'buggy
         $('#modalReady').modal({backdrop: 'static', keyboard: false})
       }
     });
