@@ -39,7 +39,7 @@ var tos2021pts = {"Abel":0,"Abinav":0,"Abinavraj":0,"Adi":13,"Aditya":0,"Akanksh
 Object.keys(tos2019ptsZero).forEach(v => tos2019ptsZero[v] = 0);
 
 var p5obj;
-function startSketch(toastiesPoints, spring = 0.05, gravity = 0.02/1000000,friction = -0.5){
+function startSketch(toastiesPoints, spring = 0.03, gravity = 0.02/100,friction = -0.5){
 let balls = [];
 var sketch = function( p ) {
  p.windowResized = function () {
@@ -62,8 +62,8 @@ var sketch = function( p ) {
      }
 
      collide() {
-       let d = Math.round(Math.random()) * 2 - 1;
-       if (d == 1) {return;}
+       // let d = Math.round(Math.random()) * 2 - 1;
+       // if (d == 1) {return;}
        for (let i = this.id + 1; i < numBalls; i++) {
          // console.log(others[i]);
          let dx = this.others[i].x - this.x;
@@ -90,10 +90,10 @@ var sketch = function( p ) {
      move() {
        let direction_x = Math.round(Math.random()) * 2 - 1;
        let direction_y = Math.round(Math.random()) * 2 - 1;
-       this.vy += direction_x*gravity*(3*this.pts+1);
-       this.vx += direction_y*gravity*(3*this.pts+1);
-       this.x += this.vx;
-       this.y += this.vy;
+       this.vy += (3*this.pts+0.1)*direction_x*gravity;
+       this.vx += (3*this.pts+0.1)*direction_y*gravity;
+       this.x +=  this.vx;
+       this.y +=  this.vy;
        if (this.x + this.diameter / 2 > p.width) {
          this.x = p.width - this.diameter / 2;
          this.vx *= friction;
@@ -157,7 +157,8 @@ var sketch = function( p ) {
          p.random(p.width),
          p.random(p.height),
          // random(30, 70),
-         (version2)? Math.pow((pts+9)*21, 0.8) : Math.pow((pts+40), 1.2),
+         // (version2)? Math.pow((pts+9)*21, 0.8) : Math.pow((pts+40), 1.2),
+         (version2)? Math.pow((pts+4)*6, 0.8) : Math.pow((pts+15), 1.2),
          i,
          balls,
          key,
