@@ -1,0 +1,279 @@
+
+<!--========================================
+=            Navigation Section            =
+=========================================-->
+
+<nav class="navbar main-nav border-less fixed-top navbar-expand-lg p-0">
+  <div class="container-fluid p-0">
+      <!-- logo -->
+      <a class="navbar-brand" href="index.html">
+        <img src="images/logo.png" alt="logo">
+      </a>
+
+      <div align='center'>
+        <button class="btn btn-main-md" onclick="version2=false;markZero=false;if(p5obj!=undefined){p5obj.remove();}startSketch(tos2019pts)">tOS 2.0.20</button>
+        <!-- <button class="btn btn-main-md" onclick="p5obj.loop()">start </button> -->
+        <!-- <button class="btn btn-main-md" onclick="">tOS 2.0.21</button> -->
+        <button class="btn btn-main-md" onclick="$('#modalHow2EarnPoints').modal()">
+          Ways to Grow
+        </button>
+      </div>
+
+  </div>
+</nav>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="modalWelcome" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Please Update</h5>
+        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+      </div>
+      <div class="modal-body">
+        Hey toasty bro/sis, your system is outdated. Please upgrade to 2.0.21.
+        <!-- <br><br><button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal" onclick="$("#modalHow2EarnPoints").modal();">Why?</button> -->
+        <br><br><button type="button" class="btn btn-sm btn-secondary" onclick="$('#modalWelcome').modal('hide');setTimeout(function(){$('#modalWelcome').modal()}, 1000);">I will think about it later!</button>
+        <br><br><button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal" onclick="$(this).hide()">No. I like tOS 2.0.20</button>
+        <br><br><button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal" onmouseover="$(this).text('Yes, upgrade')" onmouseout="$(this).text('No. DO NOT ask me again')">No, don't ask me again</button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-xl btn-primary" onclick="$('#modalWelcome').modal('hide'); $('#modalUpgrade').modal();">Sure!</button>
+        <button type="button" class="btn btn-sm btn-secondary" disabled>Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalReady" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Installation Complete!</h5>
+        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+      </div>
+      <div class="modal-body">
+        We have deleted all your toasty points. Now you are free to have a fresh start!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="$('#modalWelcome').modal('hide'); tos2021();">Unlock tOS 2.0.21</button>
+        <!-- <button type="button" class="btn btn-xl btn-primary" onclick="$('#modalWelcome').modal('hide'); $('#modalUpgrade').modal();">Sure!</button> -->
+        <!-- <button type="button" class="btn btn-sm btn-secondary" disabled>Close</button>
+        -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalUpgrade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Thank you for choosing to upgrade!</h5>
+        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+      </div>
+      <div class="modal-body">
+        Upgrading... Please be patient.
+        About 23244454 seconds to finish...
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Got it</button>
+        <!-- <button type="button" class="btn btn-xl btn-primary" onclick="$('#modalWelcome').modal('hide'); $('#modalUpgrade').modal();">Sure!</button> -->
+        <!-- <button type="button" class="btn btn-sm btn-secondary" disabled>Close</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="modalHow2EarnPoints" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ways to Earn Points</h5>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <h1>tOS 2.0.20 </h1>
+
+              <ul class="list-group" style="border:none">
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                  <span class="badge bg-primary rounded-pill">+1</span>
+                  <div class="ms-2 me-auto">
+                    <div class="fw-bold"><strong>Attending Meeting/Social</strong></div>
+                  </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                  <span class="badge bg-primary rounded-pill">+2</span>
+                  <div class="ms-2 me-auto">
+                    <div class="fw-bold"><strong>Delivering Prepared Speech</strong></div>
+                  </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                  <span class="badge bg-primary rounded-pill">+1</span>
+                  <div class="ms-2 me-auto">
+                    <div class="fw-bold"><strong>Delivering TT Speech/Evaluation</strong></div>
+                  </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                  <span class="badge bg-primary rounded-pill">+1</span>
+                  <div class="ms-2 me-auto">
+                    <div class="fw-bold"><strong>Early TM sign-up</strong></div>
+                  </div>
+                </li><li class="list-group-item d-flex justify-content-between align-items-start">
+                  <span class="badge bg-primary rounded-pill">+4</span>
+                  <div class="ms-2 me-auto">
+                    <div class="fw-bold"><strong>Member Sign-up</strong></div>
+                  </div>
+                </li><li class="list-group-item d-flex justify-content-between align-items-start">
+                  <span class="badge bg-primary rounded-pill">+3</span>
+                  <div class="ms-2 me-auto">
+                    <div class="fw-bold"><strong>Best Speaker</strong></div>
+                  </div>
+                </li><li class="list-group-item d-flex justify-content-between align-items-start">
+                  <span class="badge bg-primary rounded-pill">+2</span>
+                  <div class="ms-2 me-auto">
+                    <div class="fw-bold"><strong>Best TableTopics/Evaluator</strong></div>
+                  </div>
+                </li><li class="list-group-item d-flex justify-content-between align-items-start">
+                  <span class="badge bg-primary rounded-pill">+2</span>
+                  <div class="ms-2 me-auto">
+                    <div class="fw-bold"><strong>Receieved Traveling Award</strong></div>
+                  </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                  <span class="badge bg-primary rounded-pill">+1</span>
+                  <div class="ms-2 me-auto">
+                    <div class="fw-bold"><strong>Toastmaster/TopicsMastr/GE</strong></div>
+                    Since 2.0.20
+                  </div>
+
+                </li>
+
+              </ul>
+
+            </div>
+            <div class="col">
+              <h1>tOS 2.0.21</h1>
+              <ul class="list-group" style="border:none">
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                  <span class="badge bg-primary rounded-pill">+1</span>
+                  <div class="ms-2 me-auto">
+                    <div class="fw-bold"><strong>Attending Meeting/Social Virtually</strong></div>
+                  </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                  <span class="badge bg-warning rounded-pill">+3</span>
+                  <div class="ms-2 me-auto">
+                    <div class="fw-bold"><strong>Attending Meeting/Social In-Person</strong></div>
+                  </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                  <span class="badge bg-warning rounded-pill">+3</span>
+                  <div class="ms-2 me-auto">
+                    <div class="fw-bold"><strong>Delivering Prepared Speech</strong></div>
+                  </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                  <span class="badge bg-danger rounded-pill">+5</span>
+                  <div class="ms-2 me-auto">
+                    <div class="fw-bold"><strong>Delivering <i>Group Speech [NEW]</i></strong></div>
+                    e.g. Dual speech with your mentor :)
+                  </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                  <span class="badge bg-warning rounded-pill">+2</span>
+                  <div class="ms-2 me-auto">
+                    <div class="fw-bold"><strong>Delivering TT Speech/Evaluation</strong></div>
+                  </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                  <span class="badge bg-info rounded-pill">-2</span>
+                  <div class="ms-2 me-auto">
+                    <div class="fw-bold"><strong>Signed up but join late (after 5:55) </strong></div>
+                  </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                  <span class="badge bg-warning rounded-pill">+1</span>
+                  <div class="ms-2 me-auto">
+                    <div class="fw-bold"><strong>Give feedbacks/ideas</strong></div>
+                    to improve the meeting
+                  </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                  <span class="badge bg-primary rounded-pill">+1</span>
+                  <div class="ms-2 me-auto">
+                    <div class="fw-bold"><strong>Early TM sign-up</strong></div>
+                    including TT Speech
+                  </div>
+                </li><li class="list-group-item d-flex justify-content-between align-items-start">
+                  <span class="badge bg-primary rounded-pill">+4</span>
+                  <div class="ms-2 me-auto">
+                    <div class="fw-bold"><strong>Member Sign-up</strong></div>
+                  </div>
+                </li><li class="list-group-item d-flex justify-content-between align-items-start">
+                  <span class="badge bg-primary rounded-pill">+3</span>
+                  <div class="ms-2 me-auto">
+                    <div class="fw-bold"><strong>Best Speaker</strong></div>
+                  </div>
+                </li><li class="list-group-item d-flex justify-content-between align-items-start">
+                  <span class="badge bg-primary rounded-pill">+2</span>
+                  <div class="ms-2 me-auto">
+                    <div class="fw-bold"><strong>Best TableTopics/Evaluator</strong></div>
+                  </div>
+                </li><li class="list-group-item d-flex justify-content-between align-items-start">
+                  <span class="badge bg-warning rounded-pill">+1</span>
+                  <div class="ms-2 me-auto">
+                    <div class="fw-bold"><strong>Use Word of the Day</strong></div>
+                  </div>
+                </li><li class="list-group-item d-flex justify-content-between align-items-start">
+                  <span class="badge bg-warning rounded-pill">+🎲</span>
+                  <div class="ms-2 me-auto">
+                    <div class="fw-bold"><strong>Receieved Traveling Award</strong></div>
+                  </div>
+                </li>
+
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                  <span class="badge bg-warning rounded-pill">+2</span>
+                  <div class="ms-2 me-auto">
+                    <div class="fw-bold"><strong>Toastmaster/TopicsMastr/GE</strong></div>
+                  </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                  <span class="badge bg-warning rounded-pill">+1</span>
+                  <div class="ms-2 me-auto">
+                    <div class="fw-bold"><strong>Sign up for supporting roles</strong></div>
+                  </div>
+                </li>
+
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                 Change log
+                </button>
+                <div class="collapse" id="collapseExample">
+                  <div class="card card-body">
+                    <ul>
+                      <li>9/10/2021 - tOS 2.0.21.</li>
+                    </ul>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Got it</button>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>
