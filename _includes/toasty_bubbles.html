@@ -20,7 +20,7 @@ Object.keys(tos2019ptsZero).forEach(v => tos2019ptsZero[v] = 0);
 
 
 
-
+var OFFSET_Y = 30; //10; (ismobile)?35:10; 768 width
 var p5obj;
 function startSketch(toastiesPoints, spring = 0.03, gravity = 0.02/100,friction = -0.5){
 let balls = [];
@@ -108,7 +108,8 @@ var sketch = function( p ) {
        p.fill("#7c2128");
        // text(this.name, this.x, this.y)
        // this.a.position(this.x-20, this.y+450) // because of the footer... affect
-       this.a.position(this.x-30, this.y+10) // because of the footer... affect
+       // this.a.position(this.x-30, this.y+10) // because of the footer... affect -->
+       this.a.position(this.x-30, this.y+OFFSET_Y) // because of the footer... affect
        // this.a.position(this.x-20, this.y+10) // without the template
      }
    }
