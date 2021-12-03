@@ -10,7 +10,7 @@ const date = new Date(2009, 10, 10);  // 2009-11-10
 const month = date.toLocaleString('default', { month: 'short' });
 console.log(month);
 */
-
+var meetingColToday;
 // https://html-online.com/articles/get-url-parameters-javascript/
 function getUrlVars() {
     var vars = {};
@@ -243,15 +243,17 @@ class SignupSheet extends SheetV4{
     // theme is the third row
     var date_row = this.table.rows[0].c;
     var theme_row = this.table.rows[3].c;
-    // let date_now = date.getDateWithoutTime().addDays(1); // so weird
-    this.date = date_now;
+    // date_now = date.getDateWithoutTime().addDays(1); // so weird
+    this.date = today;
     var index, cell;
+    var meeting_col = 1; //index;
+
     for ([index, cell] of date_row.entries()) {
       if(index==0){continue}
       if(cell==null){continue}
       if(cell.v==null){continue}
       let date = ('f' in cell)? (new Date(eval(cell.v)).getDateWithoutTime().addDays(-1)) : new Date(cell.v.trim());
-      console.warn(`compare ${date.yyyymmdd()} and ${date_now.yyyymmdd()}`)
+      console.log(`compare ${date.yyyymmdd()} and ${date_now.yyyymmdd()}`)
       // console.log(cell)
       // console.log(date)
       if( date_now.getFullYear() === date.getFullYear() ) {
@@ -270,8 +272,8 @@ class SignupSheet extends SheetV4{
         console.log('getMeetingCol:break3')
         break;
       }
+      meeting_col +=1;
     }
-    var meeting_col = index;
     console.warn(`meeting_col: ${meeting_col}`)
     if(theme_row[meeting_col-1]!=null) {$("#themeLast").html(theme_row[meeting_col-1].v);}
     if(theme_row[meeting_col]!=null) {$("#themeThis").html(theme_row[meeting_col].v);}
@@ -285,8 +287,12 @@ class SignupSheet extends SheetV4{
     this.meetingCol = col;
     // console.log(`today: ${date}`)
     this.roles = this.getColumn(this.meetingCol);
-    $("#theme").html(this.roles['Theme']);
-    $("#desc").html(this.roles['Description']);
+    var theme_string = this.roles['Theme'];
+    if (theme_string  != null) {
+      $("#theme").html(theme_string.split(':')[0]);
+      $("#desc").html(theme_string.split(':')[1]);
+    }
+    // $("#desc").html(this.roles['Description']);
     $("#when_where").html('5:55 PM ~ 7:15 PM, ' + this.roles['Date'] + ', ' + this.roles['Room']);
     this.fillInForm();
     // -----------------------------
@@ -294,25 +300,29 @@ class SignupSheet extends SheetV4{
     // -----------------------------
     // only count down future events
     let target = this.getDateOfColumn(this.roles).getDateWithoutTime();
-    $('.timer').html(""); //empty existing first
-    // haven't reach target date
-    if (new Date() < target) {
-      $('.timer').syotimer({
-          year: target.getFullYear(),
-          month: target.getMonth()+1,
-          day: target.getDate(),
-          hour: 18,
-          minute: 0
-      });
+    if( $('.timer').length )  { // exist
+      $('.timer').html(""); //empty existing first
+      // haven't reach target date
+      if (new Date() < target) {
+        $('.timer').syotimer({
+            year: target.getFullYear(),
+            month: target.getMonth()+1,
+            day: target.getDate(),
+            hour: 18,
+            minute: 0
+        });
+      }
     }
+
   }
   showAgendaByDate(date) {
-    if ((this.sheename != null) && (this.sheename == SignupSheet.getMeetingSheetName(date))) {
+    if (0) { // always reload
+      // (this.sheename != null) && (this.sheename == SignupSheet.getMeetingSheetName(date))
       // can do without reload sheet
       this.showAgendaByColumn(this.getMeetingCol(date));
     } else {
       // has to load from another sheet
-      let url = window.location.origin + '/index.html?date='+date.yyyymmdd();
+      let url = window.location.origin + '/agenda.html?date='+date.yyyymmdd();
       location.replace(url)
     }
   }
@@ -320,22 +330,33 @@ class SignupSheet extends SheetV4{
     // not working properly
     // location.href = window.location.origin + '/index.html?date='+this.date.addDays(8).yyyymmdd();
     // console.log(location.href)
-    this.showAgendaByColumn(meetingColToday + 1);
+    if (1) { // not in the current sheet meetingColToday < 9
+      this.showAgendaByDate(this.date.addDays(8));
+    }  else {
+      meetingColToday += 1;
+      this.showAgendaByColumn(meetingColToday);
+    }
     // let url = window.location.origin + '/index.html?date='+this.date.addDays(8).yyyymmdd();
     // location.replace(url)
     // return false
   }
   thisMeeting() {
-    this.showAgendaByColumn(meetingColToday);
+    // this.showAgendaByColumn(meetingColToday);
+    this.showAgendaByDate(new Date());
   }
   throwback2020() {
-    let url = window.location.origin + '/index.html?date='+this.date.addYears(-1).yyyymmdd();
+    let url = window.location.origin + '/agenda.html?date='+this.date.addYears(-1).yyyymmdd();
     location.replace(url)
     // console.log(location.href)
     return false
   }
   prevMeeting() {
-    this.showAgendaByColumn(meetingColToday - 1);
+    if (1) { // meetingColToday > 1// not in the current sheet
+      this.showAgendaByDate(this.date.addDays(-6));
+    } else {
+      meetingColToday -= 1;
+      this.showAgendaByColumn(meetingColToday);
+    }
     // let url = window.location.origin + '/index.html?date='+this.date.addDays(-7).yyyymmdd();
     // // console.log(location.href)
     // location.replace(url)
@@ -538,8 +559,10 @@ class SignupSheet extends SheetV4{
           result += short_name;
         }
       }
-      $(element).html( (result=='')?`<a href="https://docs.google.com/spreadsheets/d/17Vtxbeh7Q6-ic89sWC8_U8RUoUAr6dlvi3jxADRMNQU/"
-      class="btn btn-main-sm" style='padding:2px'>Signup role</a>`:result);
+      // $(element).html( (result=='')?`<a href="https://docs.google.com/spreadsheets/d/17Vtxbeh7Q6-ic89sWC8_U8RUoUAr6dlvi3jxADRMNQU/"
+      // class="btn btn-main-sm" style='padding:2px'>Signup role</a>`:result);
+      $(element).html( (result=='')?`<form action="https://docs.google.com/spreadsheets/d/17Vtxbeh7Q6-ic89sWC8_U8RUoUAr6dlvi3jxADRMNQU/"
+      ><input type="submit" value="Signup role" /></form>`:result);
   }
   fillInInfo(role, element) {
       let s = this.whereis(role);
@@ -565,23 +588,35 @@ class SignupSheet extends SheetV4{
     // add those who already assigned
 
     // disable speech role suggestion, don't show it if there are no speaker
-    if ($('#whoIsSpeaker1').text() == 'NA') {
+    if ($('#whoIsSpeaker1').text() == '') {
       $('#speech1').hide();
       $('#eval1').hide();
+      $('#whoIsSpeaker1').html('&nbsp;')
+      $('#whatSpeech1').html('&nbsp;')
+      $('#whoIsEvaluator1').html('&nbsp;')
+      $('#eval1').html('&nbsp;')
     } else {
       $('#speech1').show();
       $('#eval1').show();
     }
-    if ($('#whoIsSpeaker2').text() == 'NA') {
+    if ($('#whoIsSpeaker2').text() == '') {
       $('#speech2').hide();
       $('#eval2').hide();
+      $('#whoIsSpeaker2').html('&nbsp;')
+      $('#whatSpeech2').html('&nbsp;')
+      $('#whoIsEvaluator2').html('&nbsp;')
+      $('#eval2').html('&nbsp;')
     } else {
       $('#speech2').show();
       $('#eval2').show();
     }
-    if ($('#whoIsSpeaker3').text() == 'NA') {
+    if ($('#whoIsSpeaker3').text() == '') {
       $('#speech3').hide();
       $('#eval3').hide();
+      $('#whoIsSpeaker3').html('&nbsp;')
+      $('#whatSpeech3').html('&nbsp;')
+      $('#whoIsEvaluator3').html('&nbsp;')
+      $('#eval3').html('&nbsp;')
     } else {
       $('#speech3').show();
       $('#eval3').show();

@@ -32,7 +32,7 @@ var date = getUrlVars()["date"]
 var member = getUrlVars()["member"]; //'Zoe'; //"Shaheer"; // 'Zoe'; // getUrlVars()["member"]
 var now = (date == undefined)? new Date() : new Date(date);
 var today = now.getDateWithoutTime()
-var meetingColToday;
+
 console.warn(`today: ${today}`)
 
 $(document).ready(function() {
