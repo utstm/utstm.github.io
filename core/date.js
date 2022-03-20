@@ -1,5 +1,5 @@
-const monthNames = ["Jan", "Feb", "March", "April", "May", "June",
-  "July", "Aug", "Sep", "Oct", "Nov", "Dec"
+const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
 ];
 // https://stackoverflow.com/questions/3066586/get-string-in-yyyymmdd-format-from-js-date-object
 Date.prototype.yyyymmdd = function() {
